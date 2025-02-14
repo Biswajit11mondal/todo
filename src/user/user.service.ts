@@ -22,4 +22,10 @@ export class UserService {
     const user: User = await this.prisma.user.findFirst({ where: { id } });
     return user;
   }
+  
+
+  async getAllUser(): Promise<User[]> {
+    const user: User[] = await this.prisma.user.findMany();
+    return user;
+  }
 }
