@@ -26,4 +26,30 @@ model User {
   role       String
   created_at DateTime @default(now())
   updated_at DateTime @default(now()) @updatedAt
+  Task       Task[]
+}
+
+
+enum StatusEnum {
+ Open
+ InProgress
+ closed
+}
+enum PriorityStatusEnum {
+  Low
+  High
+  Medium
+}
+model Task {
+  id          String   @id() @default(uuid())
+  title       String
+  description String
+  status      StatusEnum
+  priority    PriorityStatusEnum
+  dueDate    DateTime
+  createdBy  String
+  assigned_to String?
+  User        User?     @relation(references: [id], fields: [assigned_to])
+  created_at  DateTime @default(now())
+  updated_at  DateTime @default(now()) @updatedAt
 }
