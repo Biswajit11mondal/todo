@@ -31,5 +31,14 @@ export class CreateUserDto {
   )
   password: string;
 
- 
+  @ApiProperty({
+    description: 'Role of the user',
+    enum: UserRoleEnum,
+    example: UserRoleEnum.Admin,
+  })
+  @IsNotEmpty({ message: 'User role is required' })
+  @IsEnum(UserRoleEnum, {
+    message: 'Invalid user role, enum contain Admin, Member',
+  })
+  role: UserRoleEnum;
 }
